@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-  - "10"
-deploy: 
+- '10'
+deploy:
   provider: heroku
-  edge: true
   api_key:
-    secure: e9115779-82a2-41c6-983a-f37c0582f9b9
-  app: polar-ocean-65786
+    secure: q7nmlEwy+pY3QjcrZPBGxHhxOMZ/4HzrE0eUJ67nXikNa/xBSO4QtHC4EtMiCRmV/qEzby48u2MZOUuyAU4CrDEA7LRvRKkpBwBovdpwkEY0EnudpmFppRo/TjrOBr+LSp6Eoujy0vIRyrZ1SXG6xf1N4pMvSbyZwV7eIuSQgzUxz+pgj8E6uOFhs29i/fx/76ppFrkDHMXjqWcsoHRMLcJ9Vf/PTFvXOXyybbwuFDPeovqIf49KCd3uP0lmfSA2Dw/eaQgJgi0Sby+z7lNp14HZ8D75WzPOGeEjHoD+Wh73rwlIn5X56hH6IkOvbp46gYA58IHQJY2tJtZoEyA6uO4lyGWn0eec6SfEK+O8DHFsLVunjhLv7Gr49SAQ3aymIgyCtNbGCpzmJOkvUO2RvKnfXz+6U3aRn1DqjK6iwDilClNczqTtYNLHDdN0RjWwzVwPwpWrCzzP/uwHgHh9+eMsSML69Ue6Odvid7yufksvKmI0Wl4qOYv2+JkrK1UJSA1CcYmo9cI+SQMAJGF3YMn0LHEmX96C0UOH5k8RstpmjccTtNilv+x5qK7txKJMVZIMU/JDDwYCGM3obxva7ZJSjugfLohardTiQqfdfFseYf0hVwNLsEqdxCW2DHOxMmvPxyS5XQ5EQ/UsaWmIJiWk5jju+LVcMyXlJqrqNvI=
+  app: polar-ravine-66926
+  on:
+    repo: lightsage88/crosspadAPI
