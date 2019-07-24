@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "10"
+deploy: 
+  provider: heroku
+  edge: true
+  api_key:
+    secure: e9115779-82a2-41c6-983a-f37c0582f9b9
+  app: polar-ocean-65786
