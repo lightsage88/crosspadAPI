@@ -3,9 +3,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const gamesRouter = require('./routes/games');
 const {apiUrl, apiKey} = require('./config');
-   
      
-   
+      
+    
 const app = express();     
 app.use(cors());         
 // app.use(bod yParser.urlencoded({extended: false})); 
