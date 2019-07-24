@@ -22,8 +22,7 @@ app.get('/', (req, res)=>{
     console.log('we are listening on shit');
 })
  
-// app.listen(process.env.PORT || 8888, ()=> {
-app.listen(8888, () =>{
+app.listen(process.env.PORT || 8888, ()=> {
     console.log('howdy we are on ' + 8888);
 });
   
