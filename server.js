@@ -24,7 +24,7 @@ app.get('/', (req, res)=>{
     console.log('we are listening on shit');
 })
  
-app.listen(8888, ()=> {
-    console.log('ho wdy');
+app.listen(process.env.PORT || 8888, ()=> {
+    console.log('howdy');
 });
   
