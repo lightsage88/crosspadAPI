@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());  
      
 
-const gameRoutes = require('./routes/games');
+const gamesRouter = require('./routes/games');
 const collectionsRoutes = require('./routes/collections');
 const coversRoutes = require('./routes/covers');
  
