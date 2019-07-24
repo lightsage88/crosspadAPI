@@ -1,10 +1,4 @@
 language: node_js
 node_js:
 - '10'
-deploy:
-  provider: heroku
-  api_key:
-    secure: 2c0e8bdd-560b-4b22-986c-be9e67a783b9
-    app: polar-ravine-66926
-  on:
-    repo: lightsage88/crosspadAPI
+
