@@ -1,2 +1,2 @@
-exports.apiUrl = process.env.apiUrl;
+exports.apiUrl = process.env.IGDB_API_URL;
 exports.apiKey = process.env.apiKey;
