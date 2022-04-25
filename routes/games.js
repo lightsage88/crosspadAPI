@@ -13,7 +13,9 @@ var wrapper = function (gamesConfig) {
         let gamesConfigData = gamesConfig;
         console.log(req.body);
         let { type, fieldOptions, gameId, collectionOfIds, searchValue } = req.body;
-        requestFromGames(res, type, fieldOptions, gameId, collectionOfIds, searchValue, gamesConfigData);
+        let response = await requestFromGames(res, type, fieldOptions, gameId, collectionOfIds, searchValue, gamesConfigData);
+        console.log('what we send to client:', response);
+        res.json(response);
     });
 
     const join = (array) => {
@@ -63,7 +65,7 @@ var wrapper = function (gamesConfig) {
             default:
                 return;
         }
-        res.json(response);
+        return response.data;
     }
     return router;
 }
