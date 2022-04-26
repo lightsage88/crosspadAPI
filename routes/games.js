@@ -13,7 +13,15 @@ var wrapper = function (gamesConfig) {
         let gamesConfigData = gamesConfig;
         console.log(req.body);
         let { type, fieldOptions, gameId, collectionOfIds, searchValue } = req.body;
-        let response = await requestFromGames(res, type, fieldOptions, gameId, collectionOfIds, searchValue, gamesConfigData);
+        let response = await requestFromGames(
+            res,
+            type,
+            fieldOptions,
+            gameId,
+            collectionOfIds,
+            searchValue,
+            gamesConfigData
+        );
         console.log('what we send to client:', response);
         res.json(response);
     });
@@ -40,27 +48,29 @@ var wrapper = function (gamesConfig) {
         // let fieldData = 'name,id';
         switch (type) {
             case 'search':
-                response = await igdbClient 
-                .fields(fieldData)
-                .search(searchValue)
-                .request('/games')
-                console.log('the fucking response!', response);
+                response = await igdbClient
+                    .fields(fieldData)
+                    .search(searchValue)
+                    .request('/games')
+                console.log('the search response', response);
                 break;
-                //TODO: See if these ones work, actually.
+            //TODO: See if these ones work, actually.
             case 'specificGame':
                 response = await igdbClient
-                .fields(fieldData)
-                .where(`id = ${gameID}`)
-                .request('/games')
+                    .fields(fieldData)
+                    .where(`id = ${gameId}`)
+                    .request('/games')
                 // data = `\nfields ${fieldData}; where id=${gameId};`;
-                console.log('specificGameResponse:', specificGameResponse);
+                console.log('specificGameResponse:', response);
                 break;
             case 'franchiseGames':
                 response = await igdbClient
-                .fields(fieldData)
-                .where(`id = (${collectionOfIds.toString()})`)
-                .request('/games')
+                    .fields(fieldData)
+                    .where(`id = (${collectionOfIds.toString()})`)
+                    .request('/games')
+                console.log("🚀 ~ file: games.js ~ line 71 ~ requestFromGames ~ response", response)
                 // data = `\nfields ${fieldData}; where id=(${collectionOfIds.toString()});`;
+                
                 break;
             default:
                 return;
