@@ -1,30 +1,21 @@
 require('dotenv').config();
+const igdb = require('igdb-api-node').default;
 const express = require('express');
 const axios = require('axios');
 const { apiUrl, apiKey } = require('../config');
 
 var wrapper = function (collectionsConfig) {
+    let collectionsConfigData = collectionsConfig;
     const router = express.Router();
     router.use(express.json());
-    router.post('/', (req, res) => {
+    router.post('/', async (req, res) => {
+        const igdbClient = igdb(process.env.IGDB_CLIENT_ID, collectionsConfigData.accessToken);
         let { collectionID } = req.body;
-
-        axios({
-            method: "POST",
-            url: `${apiUrl}/collections`,
-            headers: {
-                            'Accept': 'application/json',
-            'Authorization': `Bearer ${gamesConfig.accessToken}`,
-            'Client-ID': process.env.TWITCH_CLIENT_ID
-            },
-            data: `\nfields name, games; where id = ${collectionID};`
-        })
-            .then(response => {
-                res.json(response.data);
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        let response = await igdbClient
+            .fields('name,games')
+            .where(`id = ${collectionID}`)
+            .request('/collections')
+        res.json(response.data);
     });
     return router;
 }

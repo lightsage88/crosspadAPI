@@ -23,27 +23,13 @@
         expiry = moment().add(expiresIn, 'ms');
         return accessToken;
     }
-
-    console.log('hello');
     accessToken = await generateAccessToken();
-    console.log('accessToken in async: ', accessToken);
-
-
-
     const app = express();
     app.use(cors());
-    // app.use(bod yParser.urlencoded({extended: false})); 
     app.use(express.json());
-
-    console.log('accessToken in index: ', accessToken);
     app.use('/games', gamesRouter({ accessToken }));
     app.use('/collections', collectionsRouter({ accessToken }));
     app.use('/covers', coversRouter({ accessToken }));
-
-    app.get('/', (req, res) => {
-        console.log('you hit the vanilla get route');
-    });
-
     app.listen(port, () => {
         console.log(`crosspad API listening on ${port}`);
         setInterval(async () => {

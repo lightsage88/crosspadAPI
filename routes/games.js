@@ -11,7 +11,6 @@ var wrapper = function (gamesConfig) {
     router.use(express.json());
     router.post('/', async (req, res) => {
         let gamesConfigData = gamesConfig;
-        console.log(req.body);
         let { type, fieldOptions, gameId, collectionOfIds, searchValue } = req.body;
         let response = await requestFromGames(
             res,
@@ -22,7 +21,6 @@ var wrapper = function (gamesConfig) {
             searchValue,
             gamesConfigData
         );
-        console.log('what we send to client:', response);
         res.json(response);
     });
 
@@ -41,36 +39,26 @@ var wrapper = function (gamesConfig) {
 
     const requestFromGames = async (res, type, fieldOptions, gameId, collectionOfIds, searchValue, gamesConfig) => {
         let response;
-        console.log('proxy req from games running', gamesConfig);
         const igdbClient = igdb(process.env.IGDB_CLIENT_ID, gamesConfig.accessToken);
-        console.log(fieldOptions);
         let fieldData = fieldOptions.length > 0 ? join(fieldOptions) : '';
-        // let fieldData = 'name,id';
         switch (type) {
             case 'search':
                 response = await igdbClient
                     .fields(fieldData)
                     .search(searchValue)
-                    .request('/games')
-                console.log('the search response', response);
+                    .request('/games');
                 break;
-            //TODO: See if these ones work, actually.
             case 'specificGame':
                 response = await igdbClient
                     .fields(fieldData)
                     .where(`id = ${gameId}`)
                     .request('/games')
-                // data = `\nfields ${fieldData}; where id=${gameId};`;
-                console.log('specificGameResponse:', response);
                 break;
             case 'franchiseGames':
                 response = await igdbClient
                     .fields(fieldData)
                     .where(`id = (${collectionOfIds.toString()})`)
-                    .request('/games')
-                console.log("🚀 ~ file: games.js ~ line 71 ~ requestFromGames ~ response", response)
-                // data = `\nfields ${fieldData}; where id=(${collectionOfIds.toString()});`;
-                
+                    .request('/games')                
                 break;
             default:
                 return;

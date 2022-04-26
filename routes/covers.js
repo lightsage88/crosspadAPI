@@ -1,30 +1,21 @@
 require('dotenv').config();
+const igdb = require('igdb-api-node').default;
 const express = require('express');
 const axios = require('axios');
 const { apiUrl, apiKey } = require('../config');
 
 var wrapper = function (coversConfig) {
-
     const router = express.Router();
     router.use(express.json());
-    router.post('/', (req, res) => {
+    router.post('/', async (req, res) => {
+        let coversConfigData = coversConfig;
+        const igdbClient = igdb(process.env.IGDB_CLIENT_ID, coversConfigData.accessToken);
         let { gameID } = req.body;
-
-        axios({
-            method: "POST",
-            url: `${apiUrl}/covers/`,
-            headers: {
-                'user-key': `${apiKey}`,
-                'accept': 'application/json'
-            },
-            data: `\nfields image_id, url; where game=${gameID};`
-        })
-            .then(response => {
-                res.json(response.data);
-            })
-            .catch(err => {
-                console.error(err);
-            });
+        let response = await igdbClient
+            .fields('image_id,url')
+            .where(`game = ${gameID}`)
+            .request('/covers');
+        res.json(response.data);
     });
     return router;
 }
