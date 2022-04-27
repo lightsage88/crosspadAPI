@@ -14,7 +14,7 @@ var wrapper = function (coversConfig) {
         let response = await igdbClient
             .fields('image_id,url')
             .where(`game = ${gameID}`)
-            .request('/covers');
+            .request('/covers'); 
         res.json(response.data);
     });
     return router;
