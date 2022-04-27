@@ -25,7 +25,7 @@
     }
     accessToken = await generateAccessToken();
     const app = express();
-    const whitelist = ['http://localhost:3000', 'https://infinite-harbor-38259.herokuapp.com', 'https://6268dca1c1a82460220d996d--rad-dieffenbachia-a55103.netlify.app'];
+    const whitelist = ['http://localhost:3000', 'https://rad-dieffenbachia-a55103.netlify.app/, https://rad-dieffenbachia-a55103.netlify.app'];
     const corsOptions = {
         origin: function (origin, callback) {
             if (!origin || whitelist.indexOf(origin) !== -1) {
