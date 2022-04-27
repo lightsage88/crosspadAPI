@@ -25,18 +25,8 @@
     }
     accessToken = await generateAccessToken();
     const app = express();
-    const whitelist = ['http://localhost:3000', 'https://rad-dieffenbachia-a55103.netlify.app/, https://rad-dieffenbachia-a55103.netlify.app'];
-    const corsOptions = {
-        origin: function (origin, callback) {
-            if (!origin || whitelist.indexOf(origin) !== -1) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
-        },
-        credentials: true
-    }
-    app.use(cors(corsOptions));
+    
+    app.use(cors());
     app.use(express.json());
     app.use('/games', gamesRouter({ accessToken }));
     app.use('/collections', collectionsRouter({ accessToken }));
